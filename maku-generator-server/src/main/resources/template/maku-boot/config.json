@@ -1,18 +1,20 @@
 {
   "project": {
-    "packageName": "net.maku",
+    "packageName": "com.agileboot",
     "version": "1.0.0",
     "backendPath": "D:\\generator\\maku-boot\\maku-server",
-    "frontendPath": "D:\\generator\\maku-admin"
+    "backendPathAdmin": "D:\\generator\\AgileBoot-Back-End\\agileboot-admin",
+    "backendPathDomain": "D:\\generator\\AgileBoot-Back-End\\agileboot-domain",
+    "frontendPath": "D:\\generator\\AgileBoot-Front-End"
   },
   "developer": {
-    "author": "阿沐",
-    "email": "babamu@126.com"
+    "author": "Kevin Zhang",
+    "email": "xprogrammer@163.com"
   },
   "templates": [
     {
       "templateName": "java/Controller.java.ftl",
-      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/controller/${ClassName}Controller.java"
+      "generatorPath": "${backendPathAdmin}/src/main/java/${packagePath}/${moduleName}/controller/${ClassName}Controller.java"
     },
     {
       "templateName": "java/Service.java.ftl",
@@ -28,7 +30,7 @@
     },
     {
       "templateName": "java/Entity.java.ftl",
-      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/entity/${ClassName}Entity.java"
+      "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/${moduleName}/entity/${ClassName}Entity.java"
     },
     {
       "templateName": "java/VO.java.ftl",

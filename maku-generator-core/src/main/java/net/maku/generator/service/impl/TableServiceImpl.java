@@ -93,6 +93,8 @@ public class TableServiceImpl extends BaseServiceImpl<TableDao, TableEntity> imp
         table.setPackageName(generator.getProject().getPackageName());
         table.setVersion(generator.getProject().getVersion());
         table.setBackendPath(generator.getProject().getBackendPath());
+        table.setBackendPathAdmin(generator.getProject().getBackendPathAdmin());
+        table.setBackendPathDomain(generator.getProject().getBackendPathDomain());
         table.setFrontendPath(generator.getProject().getFrontendPath());
         table.setAuthor(generator.getDeveloper().getAuthor());
         table.setEmail(generator.getDeveloper().getEmail());

@@ -141,6 +141,8 @@ public class GeneratorServiceImpl implements GeneratorService {
 
         // 生成路径
         dataModel.put("backendPath", table.getBackendPath());
+        dataModel.put("backendPathAdmin", table.getBackendPathAdmin());
+        dataModel.put("backendPathDomain", table.getBackendPathDomain());
         dataModel.put("frontendPath", table.getFrontendPath());
 
         return dataModel;

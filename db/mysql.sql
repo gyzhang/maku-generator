@@ -44,6 +44,8 @@ CREATE TABLE gen_table
     version        varchar(200) COMMENT '项目版本号',
     generator_type tinyint COMMENT '生成方式  0：zip压缩包   1：自定义目录',
     backend_path   varchar(500) COMMENT '后端生成路径',
+    backend_path_admin varchar(500) COMMENT '后端生成路径admin',
+    backend_path_domain varchar(500) COMMENT '后端生成路径domain',
     frontend_path  varchar(500) COMMENT '前端生成路径',
     module_name    varchar(200) COMMENT '模块名',
     function_name  varchar(200) COMMENT '功能名',

@@ -57,6 +57,14 @@ public class TableEntity {
      */
     private String backendPath;
     /**
+     * 后端生成路径Admin
+     */
+    private String backendPathAdmin;
+    /**
+     * 后端生成路径Domain
+     */
+    private String backendPathDomain;
+    /**
      * 前端生成路径
      */
     private String frontendPath;
