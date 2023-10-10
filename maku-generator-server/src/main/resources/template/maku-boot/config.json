@@ -13,7 +13,7 @@
   },
   "templates": [
     {
-      "templateName": "java/Controller.java.ftl",
+      "templateName": "java/controller/Controller.java.ftl",
       "generatorPath": "${backendPathAdmin}/src/main/java/${packagePath}/${moduleName}/controller/${ClassName}Controller.java"
     },
     {
