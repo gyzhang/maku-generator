@@ -8,7 +8,7 @@ spring:
     # MySQL
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/maku_generator?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
-    username: maku
+    username: root
     password: 123456
     # Oracle
     #    driver-class-name: oracle.jdbc.OracleDriver
