@@ -17,6 +17,14 @@
       "generatorPath": "${backendPathAdmin}/src/main/java/${packagePath}/admin/controller/${moduleName}/${ClassName}Controller.java"
     },
     {
+      "templateName": "java/command/AddCommand.java.ftl",
+      "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/command/Add${FunctionName}Command.java"
+    },
+    {
+      "templateName": "java/command/UpdateCommand.java.ftl",
+      "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/command/Update${FunctionName}Command.java"
+    },
+    {
       "templateName": "java/ApplicationService.java.ftl",
       "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/${FunctionName}ApplicationService.java"
     }
