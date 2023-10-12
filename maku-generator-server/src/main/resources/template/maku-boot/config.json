@@ -37,6 +37,10 @@
       "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/db/${ClassName}Service.java"
     },
     {
+      "templateName": "java/db/ServiceImpl.java.ftl",
+      "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/db/${ClassName}ServiceImpl.java"
+    },
+    {
       "templateName": "java/ApplicationService.java.ftl",
       "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/${FunctionName}ApplicationService.java"
     }
