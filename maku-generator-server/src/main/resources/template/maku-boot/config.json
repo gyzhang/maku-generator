@@ -33,6 +33,10 @@
       "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/db/${ClassName}Mapper.java"
     },
     {
+      "templateName": "java/db/Service.java.ftl",
+      "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/db/${ClassName}Service.java"
+    },
+    {
       "templateName": "java/ApplicationService.java.ftl",
       "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/${FunctionName}ApplicationService.java"
     }
