@@ -49,25 +49,27 @@ public class ${FunctionName}Model extends ${ClassName}Entity {
     * 生成的示例代码：检查是否可以安全删除
     */
     public void checkCanBeDelete() {
-        //TODO: （代码生成）请添加是否可以删除的业务逻辑
+        //if (${functionName}Service.isAssignedToUsers(this.get${FunctionName}Id())) {
+        //    throw new ApiException(ErrorCode.Business.${"${FunctionName}"?upper_case}_ALREADY_ASSIGNED_TO_USER_CAN_NOT_BE_DELETED);
+        //}
     }
 
     /**
-    * 生成的示例代码：检查${FunctionName}名称是否唯一
+    * 生成的示例代码：检查${tableComment}名称是否唯一
     */
     public void check${FunctionName}NameUnique() {
-        if (${functionName}Service.is${FunctionName}NameDuplicated(get${FunctionName}Id(), get${FunctionName}Name())) {
-            throw new ApiException(ErrorCode.Business.${FunctionName}_NAME_IS_NOT_UNIQUE, get${FunctionName}Name());
-        }
+        //if (${functionName}Service.is${FunctionName}NameDuplicated(get${FunctionName}Id(), get${FunctionName}Name())) {
+        //    throw new ApiException(ErrorCode.Business.${"${FunctionName}"?upper_case}_NAME_IS_NOT_UNIQUE, get${FunctionName}Name());
+        //}
     }
 
     /**
-    * 生成的示例代码：检查${FunctionName}编码是否唯一
+    * 生成的示例代码：检查${tableComment}编码是否唯一
     */
     public void check${FunctionName}CodeUnique() {
-        if (${functionName}Service.is${FunctionName}CodeDuplicated(get${FunctionName}Id(), get${FunctionName}Code())) {
-            throw new ApiException(ErrorCode.Business.${FunctionName}_CODE_IS_NOT_UNIQUE, get${FunctionName}Code());
-        }
+        //if (${functionName}Service.is${FunctionName}CodeDuplicated(get${FunctionName}Id(), get${FunctionName}Code())) {
+        //    throw new ApiException(ErrorCode.Business.${"${FunctionName}"?upper_case}_CODE_IS_NOT_UNIQUE, get${FunctionName}Code());
+        //}
     }
 
 }
