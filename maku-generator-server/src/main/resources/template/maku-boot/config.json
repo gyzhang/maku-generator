@@ -29,6 +29,10 @@
       "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/query/${FunctionName}Query.java"
     },
     {
+      "templateName": "java/dto/DTO.java.ftl",
+      "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/dto/${FunctionName}DTO.java"
+    },
+    {
       "templateName": "java/db/Entity.java.ftl",
       "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/db/${ClassName}Entity.java"
     },
@@ -45,8 +49,12 @@
       "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/db/${ClassName}ServiceImpl.java"
     },
     {
-      "templateName": "java/dto/DTO.java.ftl",
-      "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/dto/${FunctionName}DTO.java"
+      "templateName": "java/model/Model.java.ftl",
+      "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/model/${FunctionName}Model.java"
+    },
+    {
+      "templateName": "java/model/ModelFactory.java.ftl",
+      "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/model/${FunctionName}ModelFactory.java"
     },
     {
       "templateName": "java/ApplicationService.java.ftl",
