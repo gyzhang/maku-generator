@@ -32,11 +32,6 @@ public class ${ClassName}Entity<#if baseClass??> extends ${baseClass.code}<${Cla
 
     <#list fieldList as field>
         <#if !field.baseField>
-            <#if field.fieldComment!?length gt 0>
-    /**
-    * ${field.fieldComment}
-    */
-            </#if>
     @ApiModelProperty("${field.fieldComment}")
             <#if field.primaryPk>
     @TableId(value = "${field.fieldName}", type = IdType.AUTO)
