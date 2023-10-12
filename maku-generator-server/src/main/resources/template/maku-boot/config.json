@@ -25,6 +25,10 @@
       "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/command/Update${FunctionName}Command.java"
     },
     {
+      "templateName": "java/query/Query.java.ftl",
+      "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/query/${FunctionName}Query.java"
+    },
+    {
       "templateName": "java/db/Entity.java.ftl",
       "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/db/${ClassName}Entity.java"
     },
