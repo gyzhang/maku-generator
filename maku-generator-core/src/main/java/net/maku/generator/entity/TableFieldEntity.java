@@ -44,6 +44,10 @@ public class TableFieldEntity {
      */
     private String attrType;
     /**
+     * 前端类型
+     */
+    private String TsType;
+    /**
      * 属性包名
      */
     private String packageName;

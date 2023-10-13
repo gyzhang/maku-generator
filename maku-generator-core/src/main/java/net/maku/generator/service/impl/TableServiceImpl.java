@@ -160,6 +160,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableDao, TableEntity> imp
             updateField.setFieldComment(field.getFieldComment());
             updateField.setFieldType(field.getFieldType());
             updateField.setAttrType(field.getAttrType());
+            updateField.setTsType(field.getTsType());
 
             tableFieldService.updateById(updateField);
         });

@@ -56,9 +56,12 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldDao, TableF
             if (fieldTypeMapping == null) {
                 // 没找到对应的类型，则为Object类型
                 field.setAttrType("Object");
+                // 没找到对应的类型，则前端类型设置为string
+                field.setTsType("string");
             } else {
                 field.setAttrType(fieldTypeMapping.getAttrType());
                 field.setPackageName(fieldTypeMapping.getPackageName());
+                field.setTsType(fieldTypeMapping.getTsType());
             }
 
             field.setAutoFill(AutoFillEnum.DEFAULT.name());
