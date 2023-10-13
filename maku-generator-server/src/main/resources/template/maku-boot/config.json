@@ -59,6 +59,10 @@
     {
       "templateName": "java/ApplicationService.java.ftl",
       "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/${FunctionName}ApplicationService.java"
+    },
+    {
+      "templateName": "vue/api/api.ts.ftl",
+      "generatorPath": "${frontendPath}/src/api/${moduleName}/${functionName}.ts"
     }
   ]
 }
