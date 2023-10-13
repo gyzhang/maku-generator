@@ -1,20 +1,17 @@
 import { http } from "@/utils/http";
 
 export interface ${FunctionName}ListCommand extends BasePageQuery {
-  ${functionName}Code?: string;
-  ${functionName}Name?: string;
-  status?: number;
+  <#list queryList as param>
+  ${param.attrName}?: ${param.tsType};
+  </#list>
 }
 
 export interface ${FunctionName}PageResponse {
-  postId: number;
-  postCode: string;
-  postName: string;
-  postSort: number;
-  status: number;
-  statusStr: string;
-  remark: string;
-  createTime: string;
+  <#list fieldList as field>
+    <#if !field.baseField>
+  ${field.attrName}: ${field.tsType};
+    </#if>
+  </#list>
 }
 
 export function get${FunctionName}ListApi(params: ${FunctionName}ListCommand) {
@@ -45,11 +42,9 @@ export const delete${FunctionName}Api = (data: Array<number>) => {
 };
 
 export interface Add${FunctionName}Command {
-  postCode: string;
-  postName: string;
-  postSort: number;
-  remark?: string;
-  status?: string;
+  <#list formList as field>
+  ${field.attrName}: ${field.tsType};
+  </#list>
 }
 
 export const add${FunctionName}Api = (data: Add${FunctionName}Command) => {
