@@ -31,7 +31,7 @@ public class FieldTypeEntity {
     /**
      * 前端类型
      */
-    private String TsType;
+    private String tsType;
     /**
      * 属性包名
      */
