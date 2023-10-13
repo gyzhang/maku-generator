@@ -10,6 +10,9 @@
 			<el-form-item label="属性包名" prop="packageName">
 				<el-input v-model="dataForm.packageName" placeholder="属性包名"></el-input>
 			</el-form-item>
+			<el-form-item label="前端类型" prop="tsType">
+				<el-input v-model="dataForm.tsType" placeholder="前端类型"></el-input>
+			</el-form-item>
 		</el-form>
 		<template #footer>
 			<el-button @click="visible = false">取消</el-button>
