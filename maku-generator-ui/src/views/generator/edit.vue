@@ -27,6 +27,7 @@
 					<vxe-column field="fieldName" title="字段名"></vxe-column>
 					<vxe-column field="fieldComment" title="说明" :edit-render="{ name: 'input' }"></vxe-column>
 					<vxe-column field="fieldType" title="字段类型"></vxe-column>
+					<vxe-column field="tsType" title="前端类型"></vxe-column>
 					<vxe-column field="attrName" title="属性名" :edit-render="{ name: 'input' }"></vxe-column>
 					<vxe-column field="attrType" title="属性类型">
 						<template #default="{ row }">
@@ -59,6 +60,7 @@
 					:edit-config="{ trigger: 'click', mode: 'cell' }"
 				>
 					<vxe-column field="attrName" title="属性名"></vxe-column>
+					<vxe-column field="tsType" title="前端类型"></vxe-column>
 					<vxe-column field="fieldComment" title="说明"></vxe-column>
 					<vxe-column field="formItem" title="表单显示">
 						<template #default="{ row }">
@@ -91,6 +93,7 @@
 					:edit-config="{ trigger: 'click', mode: 'cell' }"
 				>
 					<vxe-column field="attrName" title="属性名"></vxe-column>
+					<vxe-column field="tsType" title="前端类型"></vxe-column>
 					<vxe-column field="fieldComment" title="说明"></vxe-column>
 					<vxe-column field="gridItem" title="列表显示">
 						<template #default="{ row }">
@@ -114,6 +117,7 @@
 					:edit-config="{ trigger: 'click', mode: 'cell' }"
 				>
 					<vxe-column field="attrName" title="属性名"></vxe-column>
+					<vxe-column field="tsType" title="前端类型"></vxe-column>
 					<vxe-column field="fieldComment" title="说明"></vxe-column>
 					<vxe-column field="queryItem" title="查询显示">
 						<template #default="{ row }">
