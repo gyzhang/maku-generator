@@ -35,6 +35,7 @@ const dataForm = reactive({
 	id: '',
 	columnType: '',
 	attrType: '',
+	tsType: '',
 	packageName: '',
 	createDate: ''
 })
@@ -62,7 +63,8 @@ const getFieldType = (id: number) => {
 
 const dataRules = ref({
 	columnType: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
-	attrType: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
+	attrType: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
+	tsType: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
 })
 
 // 表单提交
