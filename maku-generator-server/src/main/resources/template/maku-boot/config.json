@@ -2,7 +2,7 @@
   "project": {
     "packageName": "com.agileboot",
     "version": "1.0.0",
-    "backendPath": "D:\\generator\\maku-boot\\maku-server",
+    "backendPath": "D:\\generator",
     "backendPathAdmin": "D:\\generator\\AgileBoot-Back-End\\agileboot-admin",
     "backendPathDomain": "D:\\generator\\AgileBoot-Back-End\\agileboot-domain",
     "frontendPath": "D:\\generator\\AgileBoot-Front-End"
@@ -70,7 +70,11 @@
     },
     {
       "templateName": "sql/menu.sql.ftl",
-      "generatorPath": "${backendPathDomain}/sql/${moduleName}/${functionName}/menu4${functionName}.sql"
+      "generatorPath": "${backendPath}/sql/${moduleName}/${functionName}/menu4${functionName}.sql"
+    },
+    {
+      "templateName": "tip/必须读我.txt.ftl",
+      "generatorPath": "${backendPath}/必须读我.txt"
     }
   ]
 }
