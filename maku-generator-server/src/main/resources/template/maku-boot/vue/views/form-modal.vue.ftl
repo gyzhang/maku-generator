@@ -31,11 +31,11 @@ const visible = computed({
 });
 
 const formData = reactive<Add${FunctionName}Command | Update${FunctionName}Command>({
-	<#list fieldList as field>
+  <#list fieldList as field>
     <#if field.primaryPk>
   ${field.attrName}: <#if field.tsType?matches("number")>0<#else>""</#if>,
-	  </#if>
-	</#list>
+    </#if>
+  </#list>
   <#list formList as field>
   ${field.attrName}: <#if field.tsType?matches("number")>0<#else>""</#if><#sep>,</#sep>
   </#list>
@@ -99,65 +99,65 @@ async function handleConfirm() {
     @opened="handleOpened"
   >
     <el-form :model="formData" label-width="120px" :rules="rules" ref="formRef">
-	    <#list formList as field>
-			<#if field.formType == 'text'>
-				<el-form-item label="${field.fieldComment!}" prop="${field.attrName}"<#if field.formRequired> required</#if>>
-					<el-input v-model="formData.${field.attrName}" placeholder="${field.fieldComment!}"></el-input>
-				</el-form-item>
-			<#elseif field.formType == 'textarea'>
-				<el-form-item label="${field.fieldComment!}" prop="${field.attrName}"<#if field.formRequired> required</#if>>
-					<el-input type="textarea" v-model="formData.${field.attrName}"></el-input>
-				</el-form-item>
-			<#elseif field.formType == 'editor'>
-				<el-form-item label="${field.fieldComment!}" prop="${field.attrName}"<#if field.formRequired> required</#if>>
-					<el-input type="textarea" v-model="formData.${field.attrName}"></el-input>
-				</el-form-item>
-			<#elseif field.formType == 'select'>
-				<#if field.formDict??>
-					<el-form-item label="${field.fieldComment!}" prop="${field.attrName}"<#if field.formRequired> required</#if>>
-						<fast-select v-model="formData.${field.attrName}" dict-type="${field.formDict}" placeholder="${field.fieldComment!}"></fast-select>
-					</el-form-item>
-				<#else>
-					<el-form-item label="${field.fieldComment!}" prop="${field.attrName}"<#if field.formRequired> required</#if>>
-						<el-select v-model="formData.${field.attrName}" placeholder="请选择">
-							<el-option label="请选择" value="0"></el-option>
-						</el-select>
-					</el-form-item>
-				</#if>
-			<#elseif field.formType == 'radio'>
-				<#if field.formDict??>
-					<el-form-item label="${field.fieldComment!}" prop="${field.attrName}"<#if field.formRequired> required</#if>>
-						<fast-radio-group v-model="formData.${field.attrName}" dict-type="${field.formDict}"></fast-radio-group>
-					</el-form-item>
-				<#else>
-					<el-form-item label="${field.fieldComment!}" prop="${field.attrName}"<#if field.formRequired> required</#if>>
-						<el-radio-group v-model="formData.${field.attrName}">
-							<el-radio :label="0">启用</el-radio>
-							<el-radio :label="1">禁用</el-radio>
-						</el-radio-group>
-					</el-form-item>
-				</#if>
-			<#elseif field.formType == 'checkbox'>
-				<el-form-item label="${field.fieldComment!}" prop="${field.attrName}"<#if field.formRequired> required</#if>>
-					<el-checkbox-group v-model="formData.${field.attrName}">
-						<el-checkbox label="启用" name="type"></el-checkbox>
-						<el-checkbox label="禁用" name="type"></el-checkbox>
-					</el-checkbox-group>
-				</el-form-item>
-			<#elseif field.formType == 'date'>
-				<el-form-item label="${field.fieldComment!}" prop="${field.attrName}"<#if field.formRequired> required</#if>>
-					<el-date-picker type="date" placeholder="${field.fieldComment!}" v-model="formData.${field.attrName}"></el-date-picker>
-				</el-form-item>
-			<#elseif field.formType == 'datetime'>
-				<el-form-item label="${field.fieldComment!}" prop="${field.attrName}"<#if field.formRequired> required</#if>>
-					<el-date-picker type="datetime" placeholder="${field.fieldComment!}" v-model="formData.${field.attrName}"></el-date-picker>
-				</el-form-item>
-			<#else>
-				<el-form-item label="${field.fieldComment!}" prop="${field.attrName}"<#if field.formRequired> required</#if>>
-					<el-input v-model="formData.${field.attrName}" placeholder="${field.fieldComment!}"></el-input>
-				</el-form-item>
-			</#if>
-	    </#list>
+      <#list formList as field>
+      <#if field.formType == 'text'>
+        <el-form-item label="${field.fieldComment!}" prop="${field.attrName}"<#if field.formRequired> required</#if>>
+          <el-input v-model="formData.${field.attrName}" placeholder="${field.fieldComment!}"></el-input>
+        </el-form-item>
+      <#elseif field.formType == 'textarea'>
+        <el-form-item label="${field.fieldComment!}" prop="${field.attrName}"<#if field.formRequired> required</#if>>
+          <el-input type="textarea" v-model="formData.${field.attrName}"></el-input>
+        </el-form-item>
+      <#elseif field.formType == 'editor'>
+        <el-form-item label="${field.fieldComment!}" prop="${field.attrName}"<#if field.formRequired> required</#if>>
+          <el-input type="textarea" v-model="formData.${field.attrName}"></el-input>
+        </el-form-item>
+      <#elseif field.formType == 'select'>
+        <#if field.formDict??>
+          <el-form-item label="${field.fieldComment!}" prop="${field.attrName}"<#if field.formRequired> required</#if>>
+            <fast-select v-model="formData.${field.attrName}" dict-type="${field.formDict}" placeholder="${field.fieldComment!}"></fast-select>
+          </el-form-item>
+        <#else>
+          <el-form-item label="${field.fieldComment!}" prop="${field.attrName}"<#if field.formRequired> required</#if>>
+            <el-select v-model="formData.${field.attrName}" placeholder="请选择">
+              <el-option label="请选择" value="0"></el-option>
+            </el-select>
+          </el-form-item>
+        </#if>
+      <#elseif field.formType == 'radio'>
+        <#if field.formDict??>
+          <el-form-item label="${field.fieldComment!}" prop="${field.attrName}"<#if field.formRequired> required</#if>>
+            <fast-radio-group v-model="formData.${field.attrName}" dict-type="${field.formDict}"></fast-radio-group>
+          </el-form-item>
+        <#else>
+          <el-form-item label="${field.fieldComment!}" prop="${field.attrName}"<#if field.formRequired> required</#if>>
+            <el-radio-group v-model="formData.${field.attrName}">
+              <el-radio :label="0">启用</el-radio>
+              <el-radio :label="1">禁用</el-radio>
+            </el-radio-group>
+          </el-form-item>
+        </#if>
+      <#elseif field.formType == 'checkbox'>
+        <el-form-item label="${field.fieldComment!}" prop="${field.attrName}"<#if field.formRequired> required</#if>>
+          <el-checkbox-group v-model="formData.${field.attrName}">
+            <el-checkbox label="启用" name="type"></el-checkbox>
+            <el-checkbox label="禁用" name="type"></el-checkbox>
+          </el-checkbox-group>
+        </el-form-item>
+      <#elseif field.formType == 'date'>
+        <el-form-item label="${field.fieldComment!}" prop="${field.attrName}"<#if field.formRequired> required</#if>>
+          <el-date-picker type="date" placeholder="${field.fieldComment!}" v-model="formData.${field.attrName}"></el-date-picker>
+        </el-form-item>
+      <#elseif field.formType == 'datetime'>
+        <el-form-item label="${field.fieldComment!}" prop="${field.attrName}"<#if field.formRequired> required</#if>>
+          <el-date-picker type="datetime" placeholder="${field.fieldComment!}" v-model="formData.${field.attrName}"></el-date-picker>
+        </el-form-item>
+      <#else>
+        <el-form-item label="${field.fieldComment!}" prop="${field.attrName}"<#if field.formRequired> required</#if>>
+          <el-input v-model="formData.${field.attrName}" placeholder="${field.fieldComment!}"></el-input>
+        </el-form-item>
+      </#if>
+      </#list>
     </el-form>
   </v-dialog>
 </template>
