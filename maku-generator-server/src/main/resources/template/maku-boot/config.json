@@ -41,6 +41,10 @@
       "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/db/${ClassName}Mapper.java"
     },
     {
+      "templateName": "xml/Mapper.xml.ftl",
+      "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/db/${ClassName}Mapper.xml"
+    },
+    {
       "templateName": "java/db/Service.java.ftl",
       "generatorPath": "${backendPathDomain}/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/db/${ClassName}Service.java"
     },
@@ -63,6 +67,10 @@
     {
       "templateName": "vue/api/api.ts.ftl",
       "generatorPath": "${frontendPath}/src/api/${moduleName}/${functionName}.ts"
+    },
+    {
+      "templateName": "sql/menu.sql.ftl",
+      "generatorPath": "${backendPathDomain}/sql/${moduleName}/${functionName}/menu4${functionName}.sql"
     }
   ]
 }
