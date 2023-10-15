@@ -69,6 +69,10 @@
       "generatorPath": "${frontendPath}/src/api/${moduleName}/${functionName}.ts"
     },
     {
+      "templateName": "vue/views/utils/hook.tsx.ftl",
+      "generatorPath": "${frontendPath}/src/views/${moduleName}/${functionName}/utils/hook.tsx"
+    },
+    {
       "templateName": "vue/views/index.vue.ftl",
       "generatorPath": "${frontendPath}/src/views/${moduleName}/${functionName}/index.vue"
     },
