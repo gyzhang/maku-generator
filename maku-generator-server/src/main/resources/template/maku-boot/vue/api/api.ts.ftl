@@ -54,7 +54,11 @@ export const add${FunctionName}Api = (data: Add${FunctionName}Command) => {
 };
 
 export interface Update${FunctionName}Command extends Add${FunctionName}Command {
-  ${functionName}Id: number;
+  <#list fieldList as field>
+    <#if field.primaryPk>
+  ${field.attrName}: ${field.tsType};
+    </#if>
+  </#list>
 }
 
 export const update${FunctionName}Api = (data: Update${FunctionName}Command) => {

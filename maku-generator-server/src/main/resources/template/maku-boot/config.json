@@ -69,6 +69,10 @@
       "generatorPath": "${frontendPath}/src/api/${moduleName}/${functionName}.ts"
     },
     {
+      "templateName": "vue/views/form-modal.vue.ftl",
+      "generatorPath": "${frontendPath}/src/views/${moduleName}/${functionName}/${functionName}-form-modal.vue"
+    },
+    {
       "templateName": "sql/menu.sql.ftl",
       "generatorPath": "${backendPath}/sql/${moduleName}/${functionName}/menu4${functionName}.sql"
     },
