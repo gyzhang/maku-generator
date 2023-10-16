@@ -15,6 +15,9 @@ import lombok.Data;
 @Data
 public class Add${FunctionName}Command {
 
+    /**
+    * ${tableComment}编码
+    */
     @NotBlank(message = "${tableComment}编码不能为空")
     @Size(max = 64, message = "${tableComment}编码长度不能超过64个字符")
     protected String ${functionName}Code;
@@ -32,8 +35,14 @@ public class Add${FunctionName}Command {
     @NotNull(message = "显示顺序不能为空")
     protected Integer ${functionName}Sort;
 
+    /**
+    * 备注
+    */
     protected String remark;
 
+    /**
+    * 状态
+    */
     @PositiveOrZero
     protected String status;
 

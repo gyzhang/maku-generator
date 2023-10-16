@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author ${author} ${email}
  * @since ${version} ${date}
  */
-@Tag(name = "${tableComment}API", description = "${tableComment}相关的增删查改")
+@Tag(name = "${tableComment}API", description = "${tableComment}相关的增删改查")
 @RestController
 @RequestMapping("/${moduleName}/${functionName}")
 @Validated
@@ -57,6 +57,9 @@ public class ${ClassName}Controller extends BaseController {
         return ResponseDTO.ok(pageDTO);
     }
 
+    /**
+    * 导出查询到的所有${tableComment}数据到excel，不分页
+    */
     @Operation(summary = "${tableComment}列表导出")
     @AccessLog(title = "${tableComment}管理", businessType = BusinessTypeEnum.EXPORT)
     @PreAuthorize("@permission.has('${moduleName}:${functionName}:export')")
@@ -80,7 +83,7 @@ public class ${ClassName}Controller extends BaseController {
     /**
      * 新增${tableComment}
      */
-    @Operation(summary = "添加${tableComment}")
+    @Operation(summary = "新增${tableComment}")
     @PreAuthorize("@permission.has('${moduleName}:${functionName}:add')")
     @AccessLog(title = "${tableComment}管理", businessType = BusinessTypeEnum.ADD)
     @PostMapping
