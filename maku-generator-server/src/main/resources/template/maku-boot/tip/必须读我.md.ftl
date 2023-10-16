@@ -4,6 +4,76 @@
 
 ### ！！！非常重要，必须读我！！！
 
+代码生成器生成的代码文件（17个）清单如下：
+
+```
+|   必须读我.md //是我，是我，还是我，就是你现在看到的这个文件
+|
++---AgileBoot-Back-End
+|   +---agileboot-admin
+|   |   \---src
+|   |       \---main
+|   |           \---java
+|   |               \---com
+|   |                   \---agileboot
+|   |                       \---admin
+|   |                           \---controller
+|   |                               \---${moduleName}
+|   |                                       ${ClassName}Controller.java //控制器
+|   |
+|   \---agileboot-domain
+|       \---src
+|           \---main
+|               \---java
+|                   \---com
+|                       \---agileboot
+|                           \---domain
+|                               \---${moduleName}
+|                                   \---${functionName}
+|                                       |   ${FunctionName}ApplicationService.java //应用服务
+|                                       |
+|                                       +---command
+|                                       |       Add${FunctionName}Command.java //新增命令
+|                                       |       Update${FunctionName}Command.java //修改命令
+|                                       |
+|                                       +---db
+|                                       |       ${ClassName}Entity.java //实体，对应数据库表
+|                                       |       ${ClassName}Mapper.java //DAO，MyBatis的Mapper
+|                                       |       ${ClassName}Mapper.xml //Mapper对应的xml文件，自定义的SQL语句写到这里
+|                                       |       ${ClassName}Service.java //服务类接口，面向数据库操作的功能写到这里 
+|                                       |       ${ClassName}ServiceImpl.java //服务类实现
+|                                       |
+|                                       +---dto
+|                                       |       ${FunctionName}DTO.java //数据传输对象
+|                                       |
+|                                       +---model
+|                                       |       ${FunctionName}Model.java //领域实体，主要的业务逻辑都内聚在这里
+|                                       |       ${FunctionName}ModelFactory.java //领域实体的工厂类
+|                                       |
+|                                       \---query
+|                                               ${FunctionName}Query.java //查询类，内置了默认排序（如果表中的默认逻辑排序不是${functionName}_sort，则要修改这里）和日期范围字段（create_time，如果页面上查询的不是这个条件，则要修改这里）
+|
++---AgileBoot-Front-End
+|   \---src
+|       +---api
+|       |   \---${moduleName}
+|       |           ${functionName}.ts //后台通讯API
+|       |
+|       \---views
+|           \---${moduleName}
+|               \---${functionName}
+|                   |   ${functionName}-form-modal.vue //新增、修改窗口页面
+|                   |   index.vue //列表页面
+|                   |
+|                   \---utils
+|                           hook.tsx //列表页面配套的脚本文件
+|
+\---sql
+    \---${moduleName}
+        \---${functionName}
+                menu4${functionName}.sql //${functionName}功能对应的菜单表初始化脚本
+```
+
 以下是代码生成器生成代码后需要注意或修改的地方，请参照以下提示对生成的代码进行微调，以符合你的项目。
 
 # 1 后端代码
