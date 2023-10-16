@@ -85,8 +85,8 @@
       "generatorPath": "${backendPath}/sql/${moduleName}/${functionName}/menu4${functionName}.sql"
     },
     {
-      "templateName": "tip/必须读我.txt.ftl",
-      "generatorPath": "${backendPath}/必须读我.txt"
+      "templateName": "tip/必须读我.md.ftl",
+      "generatorPath": "${backendPath}/必须读我.md"
     }
   ]
 }
