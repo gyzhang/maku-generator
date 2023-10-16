@@ -4,7 +4,7 @@
 
 ### ！！！非常重要，必须读我！！！
 
-代码生成器生成的代码文件（17个）清单如下：
+代码生成器生成的代码文件（19个）清单如下：
 
 ```
 |   必须读我.md //是我，是我，还是我，就是你现在看到的这个文件
@@ -51,7 +51,7 @@
 |                                       |       ${FunctionName}ModelFactory.java //领域实体的工厂类
 |                                       |
 |                                       \---query
-|                                               ${FunctionName}Query.java //查询类，内置了默认排序（如果表中的默认逻辑排序不是${functionName}_sort，则要修改这里）和日期范围字段（create_time，如果页面上查询的不是这个条件，则要修改这里）
+|                                               ${FunctionName}Query.java //查询类，内置了默认排序（${functionName}_sort）和日期范围字段（create_time）
 |
 +---AgileBoot-Front-End
 |   \---src
