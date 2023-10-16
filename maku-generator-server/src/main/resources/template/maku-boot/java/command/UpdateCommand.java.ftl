@@ -15,8 +15,13 @@ import lombok.EqualsAndHashCode;
 @Data
 public class Update${FunctionName}Command extends Add${FunctionName}Command {
 
+<#list fieldList as field>
+    <#if field.primaryPk>
     @NotNull(message = "${tableComment}ID不能为空")
     @Positive
-    private Long ${functionName}Id;
+    private Long ${field.attrName};
+        <#break>
+    </#if>
+</#list>
 
 }
