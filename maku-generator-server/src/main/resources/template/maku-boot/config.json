@@ -86,7 +86,7 @@
     },
     {
       "templateName": "tip/必须读我.md.ftl",
-      "generatorPath": "${backendPath}/必须读我.md"
+      "generatorPath": "${backendPath}/必须读我(${tableComment}-${tableName}).md"
     }
   ]
 }
