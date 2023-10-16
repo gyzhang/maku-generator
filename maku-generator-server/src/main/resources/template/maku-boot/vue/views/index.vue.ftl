@@ -10,7 +10,7 @@ import AddFill from "@iconify-icons/ri/add-circle-line";
 import EditPen from "@iconify-icons/ep/edit-pen";
 import Delete from "@iconify-icons/ep/delete";
 import ${FunctionName}FormModal from "@/views/${moduleName}/${functionName}/${functionName}-form-modal.vue";
-import { PostPageResponse } from "@/api/${moduleName}/${functionName}";
+import { ${FunctionName}PageResponse } from "@/api/${moduleName}/${functionName}";
 import { CommonUtils } from "@/utils/common";
 import { useUserStoreHook } from "@/store/modules/user";
 
@@ -35,7 +35,7 @@ const {
   resetForm,
   onSortChanged,
   exportAllExcel,
-  getPostList,
+  get${FunctionName}List,
   handleDelete,
   handleBulkDelete
 } = use${FunctionName}Hook();
@@ -180,7 +180,7 @@ function openDialog(type: "add" | "update", row?: ${FunctionName}PageResponse) {
           @page-current-change="get${FunctionName}List"
           @sort-change="onSortChanged"
           @selection-change="
-            rows => (multipleSelection = rows.map(item => item.postId))
+            rows => (multipleSelection = rows.map(item => item.<#list fieldList as field><#if field.primaryPk>${field.attrName}</#if></#list>))
           "
         >
           <template #operation="{ row }">
@@ -215,7 +215,7 @@ function openDialog(type: "add" | "update", row?: ${FunctionName}PageResponse) {
       </template>
     </PureTableBar>
 
-    <post-form-modal
+    <${functionName}-form-modal
       v-model="modalVisible"
       :type="opType"
       :row="opRow"
