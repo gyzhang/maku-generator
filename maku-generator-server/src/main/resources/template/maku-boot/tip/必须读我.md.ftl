@@ -189,7 +189,7 @@
 
 代码生成器只生成基础的 CRUD 骨架代码，较为复杂的代码生成还在继续完善中，请根据你的项目实际情况对生成的代码做修改。
 
-以下是代码生成器适配的一个标准的 MySQL 数据库表：
+以下是代码生成器适配的一个标准的 MySQL 数据库表 sys_demo：
 
 - 模块=**system**
 - 功能名=**demo**
@@ -203,18 +203,18 @@
 DROP TABLE IF EXISTS `sys_demo`;
 CREATE TABLE `sys_demo`  (
   `demo_id` bigint NOT NULL AUTO_INCREMENT COMMENT '演示ID',
-  `demo_code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '演示编码',
-  `demo_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '演示名称',
+  `demo_code` varchar(64) NOT NULL COMMENT '演示编码',
+  `demo_name` varchar(64) NOT NULL COMMENT '演示名称',
   `demo_sort` int NOT NULL COMMENT '显示顺序',
   `status` smallint NOT NULL COMMENT '状态（1正常 0停用）',
-  `remark` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
+  `remark` varchar(512) NULL DEFAULT NULL COMMENT '备注',
   `creator_id` bigint NULL DEFAULT NULL COMMENT '创建人ID',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `updater_id` bigint NULL DEFAULT NULL COMMENT '修改人ID',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `deleted` tinyint(1) NOT NULL DEFAULT 0 COMMENT '逻辑删除',
   PRIMARY KEY (`demo_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '演示' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB COMMENT = '演示';
 ```
 
 ${author} ${email} v${version} ${date}
