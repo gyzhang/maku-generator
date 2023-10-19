@@ -13,16 +13,16 @@ public interface ${ClassName}Service extends IService<${ClassName}Entity> {
   /**
   * 生成的示例代码：检查${tableComment}编码是否唯一
   */
-  //boolean isPostCodeDuplicated(Long postId, String postCode);
+  //boolean is${FunctionName}CodeDuplicated(Long ${functionName}Id, String ${functionName}Code);
 
   /**
   * 生成的示例代码：检查${tableComment}名称是否唯一
   */
-  //boolean isPostNameDuplicated(Long postId, String postName);
+  //boolean is${FunctionName}NameDuplicated(Long ${functionName}Id, String ${functionName}Name);
 
   /**
   * 生成的示例代码：判断${tableComment}是否xxx
   */
-  //boolean isAssignedToUsers(Long postId);
+  //boolean isAssignedToUsers(Long ${functionName}Id);
 
 }
