@@ -88,9 +88,92 @@
 
 以上是借鉴CQRS的开发理念，将查询和操作分开处理。操作类的业务实现借鉴了DDD战术设计的理念，使用领域类，工厂类更面向对象的实现逻辑。
 
-## 1.2 表${tableName}->实体${ClassName}Entity
+## 1.2 Command和Query
+
+代码生成器以CQRS理念，生成了两个操作命令（Add${FunctionName}Command和Update${FunctionName}Command）和一个查询（${FunctionName}Query）：
+
+- Add${FunctionName}Command携带新增数据时的属性；
+
+- Update${FunctionName}Command继承自Add${FunctionName}Command添加了主键属性，供修改时使用；
+
+- ${FunctionName}Query携带了查询条件属性：如果查询条件增加了，需要在这里做调整。
+
+需要说明的是：${FunctionName}Query.addQueryCondition()方法中设置了默认排序字段${functionName}_sort和时间/日期范围字段的this.setTimeRangeColumn("create_time")，以接收前端传来的时间/日期范围条件。
+
+前端列表页面上的时间/日期范围条件示例代码如下，供参考：
+
+```vue
+      <el-form-item label="创建时间">
+        <el-date-picker
+          class="!w-[240px]"
+          v-model="timeRange"
+          value-format="YYYY-MM-DD"
+          type="daterange"
+          range-separator="-"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+        />
+      </el-form-item>
+```
+
+## 1.3 表${tableName}->实体${ClassName}Entity
 
 如果${ClassName}Entity继承了`com.agileboot.common.core.base.BaseEntity`，则有可能在生成的代码中多导入`import java.util.Date;`
+
+当前使用单一主键（<#list fieldList as field><#if field.primaryPk>${field.attrName}</#if></#list>）策略，多组合主键理论上支持，因为用不到没有测试。
+
+## 1.4 数据传输对象DTO
+
+${FunctionName}DTO.java，是用来做数据传输用的，构造方法`${FunctionName}DTO(${ClassName}Entity entity)`将从数据库中查询的一条记录构建为一个DTO，并在其属性上添加了@ExcelColumn注解，供Excel导出的时候读取信息给列命名。
+
+需要注意的是，如果属性存放了字典类型的值（如状态1=有效）则需要自行处理，示例代码如下：
+
+```java
+    private Integer status;
+
+    @ExcelColumn(name = "状态")
+    private String statusStr;
+```
+
+代码生成器中做了简化，直接生成了固定的statusStr，请检查这个DTO类，为其他使用字典的属性做对应修改。
+
+## 1.5 数据库操作
+
+1、MyBatis的Mapper接口（${ClassName}Mapper.java）：众所周知，SQL相关的操作接口都在这里，扮演DAO的角色。由于继承于MyBatis的`BaseMapper<${ClassName}Entity>`，由MyBatis提供大量的CRUD操作，只需要添加那些业务相关的自定义SQL操作。
+
+在一些较为简单的场景，可以直接将SQL写到接口上面并以@Select之类的注解标识：
+
+```java
+    @Select("SELECT p.* "
+        + "FROM sys_post p "
+        + " LEFT JOIN sys_user u ON p.post_id = u.post_id "
+        + "WHERE u.user_id = ${'#'}${'{'}userId${'}'}"
+        + " AND p.deleted = 0")
+    List<SysPostEntity> getPostsByUserId(Long userId);
+```
+
+但是在较为复杂的场景中，还是建议将这些SQL语句分离到${ClassName}Mapper.xml中，以便更好的对业务逻辑进行管理。
+
+2、MyBatis的Mapper XML（${ClassName}Mapper.xml）：AgileBoot平台是存放在`src/main/resources/mapper/${functionName}/${ClassName}Mapper.xml`位置的，为了方便管理，代码生成器建议存放在`/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/db/${ClassName}Mapper.xml`。你的自定义SQL语句就写到这里。
+
+例如在${ClassName}Mapper.java中定义了getByTableId接口：
+
+```java
+    List<TableFieldEntity> getByTableId(Long tableId);
+```
+
+在${ClassName}Mapper.xml中写getByTableId接口对应的SQL语句：
+
+```xml
+    <select id="getByTableId" resultType="${package}.domain.${moduleName}.${functionName}.db.TableFieldEntity">
+        select *
+        from gen_table_field
+        where table_id = ${'#'}${'{'}tableId${'}'}
+        order by sort
+    </select>
+```
+
+3、数据库操作的服务由${ClassName}Service.java（接口）和${ClassName}ServiceImpl.java（实现）提供，请参考在其中生成的（被注释掉）示例代码，这些代码可以安全删除。
 
 # 2 前端代码
 
