@@ -1,8 +1,4 @@
-# ！！！非常重要，必须读我！！！
-
-## ！！！非常重要，必须读我！！！
-
-### ！！！非常重要，必须读我！！！
+# <font color="red">！！！非常重要，必须读我！！！</font>
 
 代码生成器生成“${moduleName}”模块“${tableComment}(${functionName})”功能的代码文件（19个）清单如下：
 
@@ -139,6 +135,8 @@ ${FunctionName}DTO.java，是用来做数据传输用的，构造方法`${Functi
 
 ## 1.5 数据库操作
 
+数据库操作由5个文件构成，Entity、Mapper、Mapper.xml、Service和ServiceImpl。
+
 1、MyBatis的Mapper接口（${ClassName}Mapper.java）：众所周知，SQL相关的操作接口都在这里，扮演DAO的角色。由于继承于MyBatis的`BaseMapper<${ClassName}Entity>`，由MyBatis提供大量的CRUD操作，只需要添加那些业务相关的自定义SQL操作。
 
 在一些较为简单的场景，可以直接将SQL写到接口上面并以@Select之类的注解标识：
@@ -174,6 +172,49 @@ ${FunctionName}DTO.java，是用来做数据传输用的，构造方法`${Functi
 ```
 
 3、数据库操作的服务由${ClassName}Service.java（接口）和${ClassName}ServiceImpl.java（实现）提供，请参考在其中生成的（被注释掉）示例代码，这些代码可以安全删除。
+
+## 1.6 领域对象
+
+领域对象中封装了绝大部分的业务逻辑，其中和数据库相关的操作会委托给注入的${ClassName}Service。
+
+领域对象提供了2个构造方法：
+
+- ${FunctionName}Model(${ClassName}Service ${functionName}Service)：用来返回一个全新新的领域对象，通常用在新增场景；
+
+- ${FunctionName}Model(${ClassName}Entity entity, ${ClassName}Service ${functionName}Service)：通过数据库实体来返回一个已有的领域对象，通常用在修改场景。
+
+在领域对象${FunctionName}Model中以注释的方式生成了示例代码（编码是否唯一、名称是否唯一、是否可以安全删除等3个方法，对应的数据库服务${ClassName}ServiceImpl中也是以注释的方法生成了示例代码），可供参考。
+
+领域对象工厂${FunctionName}ModelFactory提供了2个方法来生产领域对象：
+
+- ${FunctionName}Model create()：创建一个全新的领域对象，供新增使用；
+
+- ${FunctionName}Model loadById(Long ${functionName}Id)：通过主键从数据库中装载信息来生产一个领域对象，供修改使用。
+
+通常，应用服务中会使用领域对象工厂来生产领域对象。
+
+## 1.7 应用服务
+
+应用服务${FunctionName}ApplicationService是“${tableComment}”功能向外提供服务的统一出口，其内会根据新增、修改、查询、修改等操作来使用${ClassName}Service或${FunctionName}ModelFactory生产的${FunctionName}Model来编排服务。
+
+例如删除功能先使用领域对象来检查是否可以删除，然后使用数据库服务${ClassName}Service来删除数据：
+
+```java
+    public void delete${FunctionName}(BulkOperationCommand<Long> deleteCommand) {
+        for (Long id : deleteCommand.getIds()) {
+            ${FunctionName}Model ${functionName}Model = ${functionName}ModelFactory.loadById(id);
+            ${functionName}Model.checkCanBeDelete();
+        }
+
+        ${functionName}Service.removeBatchByIds(deleteCommand.getIds());
+    }
+```
+
+## 1.8 控制器
+
+@RestController注解标注的${ClassName}Controller响应前端请求，调用应用服务${FunctionName}ApplicationService的方法提供的服务。
+
+前端请求参数封装成Add${FunctionName}Command（新增）、Update${FunctionName}Command（修改）、List<Long> ids（删除）或${FunctionName}Query（查询），来完成CRUD的请求服务。
 
 # 2 前端代码
 
