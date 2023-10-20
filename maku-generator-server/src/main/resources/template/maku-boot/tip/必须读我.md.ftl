@@ -112,7 +112,9 @@
       </el-form-item>
 ```
 
-## 1.3 表${tableName}->实体${ClassName}Entity
+## 1.3 表实体
+
+数据库表${tableName}对应的MyBatis实体是${ClassName}Entity。
 
 如果${ClassName}Entity继承了`com.agileboot.common.core.base.BaseEntity`，则有可能在生成的代码中多导入`import java.util.Date;`
 
@@ -197,7 +199,7 @@ ${FunctionName}DTO.java，是用来做数据传输用的，构造方法`${Functi
 
 应用服务${FunctionName}ApplicationService是“${tableComment}”功能向外提供服务的统一出口，其内会根据新增、修改、查询、修改等操作来使用${ClassName}Service或${FunctionName}ModelFactory生产的${FunctionName}Model来编排服务。
 
-例如删除功能先使用领域对象来检查是否可以删除，然后使用数据库服务${ClassName}Service来删除数据：
+例如删除功能先使用领域对象${FunctionName}Model来检查是否可以删除，然后使用数据库服务${ClassName}Service来删除数据：
 
 ```java
     public void delete${FunctionName}(BulkOperationCommand<Long> deleteCommand) {
