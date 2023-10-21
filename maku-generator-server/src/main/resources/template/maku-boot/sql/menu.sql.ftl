@@ -2,7 +2,7 @@
 <#if dbType=="SQLServer">
     <#assign dbTime = "getDate()">
 </#if>
--- 初始化菜单
+-- 【${tableComment}(${functionName})】功能的初始化菜单
 INSERT INTO `sys_menu` (`menu_name`, `menu_type`, `router_name`, `parent_id`, `path`, `is_button`, `permission`, `meta_info`, `status`, `remark`, `creator_id`, `create_time`, `updater_id`, `update_time`, `deleted`) VALUES ('${tableComment!}管理', 1, '${FunctionName}', 1, '/${moduleName}/${functionName}/index', 0, '${moduleName}:${functionName}:list', '{\"title\":\"${tableComment!}管理\",\"icon\":\"ep:expand\",\"showParent\":true}', 1, '${tableComment!}管理菜单', 1, ${dbTime}, 1, ${dbTime}, 0);
 SET @parent_menu_id = (SELECT max(menu_id) from sys_menu where menu_name = '${tableComment!}管理');
 INSERT INTO `sys_menu` (`menu_name`, `menu_type`, `router_name`, `parent_id`, `path`, `is_button`, `permission`, `meta_info`, `status`, `remark`, `creator_id`, `create_time`, `updater_id`, `update_time`, `deleted`) VALUES ('${tableComment!}查询', 0, ' ', @parent_menu_id, '', 1, '${moduleName}:${functionName}:query', '{\"title\":\"${tableComment!}查询\"}', 1, '', 1, ${dbTime}, 1, ${dbTime}, 0);
