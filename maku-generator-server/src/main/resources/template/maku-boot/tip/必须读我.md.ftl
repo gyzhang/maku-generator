@@ -1,9 +1,9 @@
 # <font color="red">！！！非常重要，必须读我！！！</font>
 
-代码生成器生成“${moduleName}”模块“${tableComment}(${functionName})”功能的代码文件（19个）清单如下：
+代码生成器生成**【${moduleName}】模块>>【${tableComment}(${functionName})】**功能的代码/说明文件（19个）清单如下：
 
 ```
-|-->必须读我.md //是我，是我，还是我，这世间最闪亮的烟火🎇！就是你现在看到的这个文件呀~
+|-->必须读我(${tableComment}-${tableName}).md //是我，是我，还是我，这世间最闪亮的烟火🎇！就是你现在看到的这个文件呀~
 |
 +---AgileBoot-Back-End
 |   +---agileboot-admin
@@ -64,7 +64,7 @@
 |                   \---utils
 |                           hook.tsx //列表页面配套的脚本文件
 |
-\---sql
+\---SQL
     \---${moduleName}
         \---${functionName}
                 menu4${functionName}.sql //${functionName}功能对应的菜单表初始化脚本
@@ -78,9 +78,9 @@
 
   请求分为两类：一类是查询，一类是操作（新增和修改）：
 
-- **查询**：${ClassName}Controller -> ${FunctionName}Query -> ${FunctionName}ApplicationService -> ${ClassName}Service -> ${ClassName}Mapper
+- **查询**：${ClassName}Controller >> ${FunctionName}Query >> ${FunctionName}ApplicationService >> ${ClassName}Service >> ${ClassName}Mapper
 
-- **操作**：${ClassName}Controller -> Add/Update${FunctionName}Command -> ${FunctionName}ApplicationService -> ${FunctionName}Model(处理逻辑) -> save/update (MyBatis-Plus的Model.insert/updateById)
+- **操作**：${ClassName}Controller >> Add/Update${FunctionName}Command >> ${FunctionName}ApplicationService >> ${FunctionName}Model(业务逻辑) >> save/update (MyBatis-Plus的`Model.insert/updateById`)
 
 以上是借鉴CQRS的开发理念，将查询和操作分开处理。操作类的业务实现借鉴了DDD战术设计的理念，使用领域类，工厂类更面向对象的实现逻辑。
 
@@ -88,102 +88,106 @@
 
 代码生成器以CQRS理念，生成了两个操作命令（Add${FunctionName}Command和Update${FunctionName}Command）和一个查询（${FunctionName}Query）：
 
-- Add${FunctionName}Command携带新增数据时的属性；
+- Add${FunctionName}Command：携带新增数据时的属性，供新增时使用；
 
-- Update${FunctionName}Command继承自Add${FunctionName}Command添加了主键属性，供修改时使用；
+- Update${FunctionName}Command：继承自Add${FunctionName}Command添加了主键属性，供修改时使用；
 
-- ${FunctionName}Query携带了查询条件属性：如果查询条件增加了，需要在这里做调整。
+- ${FunctionName}Query：携带了查询条件属性，如果查询条件增加了，需要在这里做调整。
 
-需要说明的是：${FunctionName}Query.addQueryCondition()方法中设置了默认排序字段${functionName}_sort和时间/日期范围字段的this.setTimeRangeColumn("create_time")，以接收前端传来的时间/日期范围条件。
+需要说明的是：`${FunctionName}Query.addQueryCondition()`方法中设置了默认排序字段`this.setOrderColumn("${functionName}_sort")`和时间/日期范围字段`this.setTimeRangeColumn("create_time")`，以接收前端传来的时间/日期范围条件。
 
-前端列表页面上的时间/日期范围条件示例代码如下，供参考：
+前端列表页面上的时间/日期范围查询条件示例代码如下，供参考：
 
 ```vue
-      <el-form-item label="创建时间">
-        <el-date-picker
-          class="!w-[240px]"
-          v-model="timeRange"
-          value-format="YYYY-MM-DD"
-          type="daterange"
-          range-separator="-"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-        />
-      </el-form-item>
+<el-form-item label="创建时间">
+  <el-date-picker
+      class="!w-[240px]"
+      v-model="timeRange"
+      value-format="YYYY-MM-DD"
+      type="daterange"
+      range-separator="-"
+      start-placeholder="开始日期"
+      end-placeholder="结束日期"
+  />
+</el-form-item>
 ```
 
 ## 1.3 表实体
 
 数据库表${tableName}对应的MyBatis实体是${ClassName}Entity。
 
-如果${ClassName}Entity继承了`com.agileboot.common.core.base.BaseEntity`，则有可能在生成的代码中多导入`import java.util.Date;`
+如果${ClassName}Entity继承了`com.agileboot.common.core.base.BaseEntity`，则有可能在生成的代码中多导入`import java.util.Date;`，可以根据需要删除该导入。
 
-当前使用单一主键（<#list fieldList as field><#if field.primaryPk>${field.attrName}</#if></#list>）策略，多组合主键理论上支持，因为用不到没有测试。
+当前使用单一主键（<#list fieldList as field><#if field.primaryPk>${field.attrName}</#if></#list>）策略，理论上支持“组合主键”，因为我们不用组合主键所以没有测试。
 
 ## 1.4 数据传输对象DTO
 
-${FunctionName}DTO.java，是用来做数据传输用的，构造方法`${FunctionName}DTO(${ClassName}Entity entity)`将从数据库中查询的一条记录构建为一个DTO，并在其属性上添加了@ExcelColumn注解，供Excel导出的时候读取信息给列命名。
+${FunctionName}DTO，是用来做数据传输用的，构造方法`${FunctionName}DTO(${ClassName}Entity entity)`将从数据库中查询的一条记录构建为一个DTO，并在其属性上添加了@ExcelColumn注解，供Excel导出的时候读取信息给列命名。
 
-需要注意的是，如果属性存放了字典类型的值（如状态1=有效）则需要自行处理，示例代码如下：
+需要注意的是，如果属性存放了字典类型的值（如状态“1=有效”）则需要自行处理，示例代码如下：
 
 ```java
-    private Integer status;
+private Integer status;
 
-    @ExcelColumn(name = "状态")
-    private String statusStr;
+@ExcelColumn(name = "状态")
+private String statusStr;
 ```
 
-代码生成器中做了简化，直接生成了固定的statusStr，请检查这个DTO类，为其他使用字典的属性做对应修改。
+针对状态（status）字段，代码生成器中做了简化，直接生成了固定的statusStr，如果你的业务逻辑中并没有使用status属性（字段），则手动删除之。
+
+代码生成器还生成了createTime（用来默认接收前端的日期范围查询条件）属性，如果你的业务逻辑中并没有使用createTime属性（字段），则手动删除之。
+
+如果业务中包含了其他字典类属性（字段）请检查这个${FunctionName}DTO类，为使用字典的属性做对应修改：通常是为其添加一个xxxStr，就像status对应的statusStr一样，来存放字典的lable值。
 
 ## 1.5 数据库操作
 
 数据库操作由5个文件构成，Entity、Mapper、Mapper.xml、Service和ServiceImpl。
 
-1、MyBatis的Mapper接口（${ClassName}Mapper.java）：众所周知，SQL相关的操作接口都在这里，扮演DAO的角色。由于继承于MyBatis的`BaseMapper<${ClassName}Entity>`，由MyBatis提供大量的CRUD操作，只需要添加那些业务相关的自定义SQL操作。
+1、MyBatis的Mapper接口（${ClassName}Mapper.java）：众所周知，SQL相关的操作接口都在这里，扮演DAO的角色。由于${ClassName}Mapper继承于MyBatis-Plus的`BaseMapper<${ClassName}Entity>`，自动拥有了由MyBatis-Plus提供的完备CRUD操作，只需要添加那些业务相关的自定义SQL操作（通常应该避免重复MyBatis-Plus提供的CRUD操作，建议阅读MyBatis-Plus的BaseMapper源码，加深了解）。
 
 在一些较为简单的场景，可以直接将SQL写到接口上面并以@Select之类的注解标识：
 
 ```java
-    @Select("SELECT p.* "
-        + "FROM sys_post p "
-        + " LEFT JOIN sys_user u ON p.post_id = u.post_id "
-        + "WHERE u.user_id = ${'#'}${'{'}userId${'}'}"
-        + " AND p.deleted = 0")
-    List<SysPostEntity> getPostsByUserId(Long userId);
+@Select("SELECT p.* "
+    + "FROM sys_post p "
+    + " LEFT JOIN sys_user u ON p.post_id = u.post_id "
+    + "WHERE u.user_id = ${'#'}${'{'}userId${'}'}"
+    + " AND p.deleted = 0")
+List<SysPostEntity> getPostsByUserId(Long userId);
 ```
 
 但是在较为复杂的场景中，还是建议将这些SQL语句分离到${ClassName}Mapper.xml中，以便更好的对业务逻辑进行管理。
 
-2、MyBatis的Mapper XML（${ClassName}Mapper.xml）：AgileBoot平台是存放在`src/main/resources/mapper/${functionName}/${ClassName}Mapper.xml`位置的，为了方便管理，代码生成器建议存放在`/src/main/java/${packagePath}/domain/${moduleName}/${functionName}/db/${ClassName}Mapper.xml`。你的自定义SQL语句就写到这里。
+2、MyBatis的Mapper XML（${ClassName}Mapper.xml）：AgileBoot平台是存放在`src/main/resources/mapper/${functionName}/${ClassName}Mapper.xml`位置的，为了方便管理，代码生成器建议存放在`src/main/java/${packagePath}/domain/${moduleName}/${functionName}/db/${ClassName}Mapper.xml`。你的自定义SQL语句就写到这里。
 
-例如在${ClassName}Mapper.java中定义了getByTableId接口：
+例如在${ClassName}Mapper类中定义了getByTableId接口：
 
 ```java
-    List<TableFieldEntity> getByTableId(Long tableId);
+List<TableFieldEntity> getByTableId(Long tableId);
 ```
 
-在${ClassName}Mapper.xml中写getByTableId接口对应的SQL语句：
+在${ClassName}Mapper.xml中编写getByTableId接口对应的SQL语句：
 
 ```xml
-    <select id="getByTableId" resultType="${package}.domain.${moduleName}.${functionName}.db.TableFieldEntity">
-        select *
-        from gen_table_field
-        where table_id = ${'#'}${'{'}tableId${'}'}
-        order by sort
-    </select>
+<select id="getByTableId" resultType="${package}.domain.${moduleName}.${functionName}.db.TableFieldEntity">
+    select *
+    from gen_table_field
+    where table_id = ${'#'}${'{'}tableId${'}'}
+    order by sort
+</select>
 ```
 
 3、数据库操作的服务由${ClassName}Service.java（接口）和${ClassName}ServiceImpl.java（实现）提供，请参考在其中生成的（被注释掉）示例代码，这些代码可以安全删除。
 
 ## 1.6 领域对象
 
-领域对象中封装了绝大部分的业务逻辑，其中和数据库相关的操作会委托给注入的${ClassName}Service。
+领域对象中封装了绝大部分的业务逻辑，其中和数据库相关的操作会委托给注入的${ClassName}Service数据库服务类来完成。
 
 领域对象提供了2个构造方法：
 
-- ${FunctionName}Model(${ClassName}Service ${functionName}Service)：用来返回一个全新新的领域对象，通常用在新增场景；
+- ${FunctionName}Model(${ClassName}Service ${functionName}Service)：用来返回一个全新的领域对象，通常用在新增场景；
 
-- ${FunctionName}Model(${ClassName}Entity entity, ${ClassName}Service ${functionName}Service)：通过数据库实体来返回一个已有的领域对象，通常用在修改场景。
+- ${FunctionName}Model(${ClassName}Entity entity, ${ClassName}Service ${functionName}Service)：通过数据库实体来返回一个携带业务数据（数据库记录）的领域对象，通常用在修改场景。
 
 在领域对象${FunctionName}Model中以注释的方式生成了示例代码（编码是否唯一、名称是否唯一、是否可以安全删除等3个方法，对应的数据库服务${ClassName}ServiceImpl中也是以注释的方法生成了示例代码），可供参考。
 
@@ -202,116 +206,132 @@ ${FunctionName}DTO.java，是用来做数据传输用的，构造方法`${Functi
 例如删除功能先使用领域对象${FunctionName}Model来检查是否可以删除，然后使用数据库服务${ClassName}Service来删除数据：
 
 ```java
-    public void delete${FunctionName}(BulkOperationCommand<Long> deleteCommand) {
-        for (Long id : deleteCommand.getIds()) {
-            ${FunctionName}Model ${functionName}Model = ${functionName}ModelFactory.loadById(id);
-            ${functionName}Model.checkCanBeDelete();
-        }
-
-        ${functionName}Service.removeBatchByIds(deleteCommand.getIds());
+public void delete${FunctionName}(BulkOperationCommand<Long> deleteCommand) {
+    for (Long id : deleteCommand.getIds()) {
+        ${FunctionName}Model ${functionName}Model = ${functionName}ModelFactory.loadById(id);
+        ${functionName}Model.checkCanBeDelete();
     }
+
+    ${functionName}Service.removeBatchByIds(deleteCommand.getIds());
+}
 ```
 
 ## 1.8 控制器
 
-@RestController注解标注的${ClassName}Controller响应前端请求，调用应用服务${FunctionName}ApplicationService的方法提供的服务。
+@RestController注解标注的${ClassName}Controller类响应前端请求，它调用应用服务${FunctionName}ApplicationService类的方法来完成响应。
 
-前端请求参数封装成Add${FunctionName}Command（新增）、Update${FunctionName}Command（修改）、List<Long> ids（删除）或${FunctionName}Query（查询），来完成CRUD的请求服务。
+前端请求参数封装成Add${FunctionName}Command（新增）、Update${FunctionName}Command（修改）、List\<Long\> ids（删除）或${FunctionName}Query（查询），来完成CRUD的请求服务。
+
+控制器方法的响应由ResponseDTO类统一封装，请查看源码加深了解。
+
+需要注意的是@PutMapping（修改）和@DeleteMapping（删除）注解的使用，请查阅生成的源码结合前端代码加深了解。
 
 # 2 前端代码
 
 ## 2.1 查询条件“状态”.下拉框
 
-代码位置 `/src/views/${moduleName}/${functionName}/index.vue`：
+如果需要类似于“状态”字典的查询条件请参考下面的代码，并将其添加到位置 `/src/views/${moduleName}/${functionName}/index.vue`：
 
 ```vue
-      <el-form-item label="状态" prop="status">
-        <el-select
-          v-model="searchFormParams.status"
-          placeholder="请选择状态"
-          clearable
-          class="!w-[180px]"
-        >
-          <el-option
-            v-for="dict in loginLogStatusList"
-            :key="dict.value"
-            :label="dict.label"
-            :value="dict.value"
-          />
-        </el-select>
-      </el-form-item>
+<el-form-item label="状态" prop="status">
+  <el-select
+    v-model="searchFormParams.status"
+    placeholder="请选择状态"
+    clearable
+    class="!w-[180px]"
+  >
+    <el-option
+      v-for="dict in loginLogStatusList"
+      :key="dict.value"
+      :label="dict.label"
+      :value="dict.value"
+    />
+  </el-select>
+</el-form-item>
 ```
 
 ## 2.2 查询条件“创建日期”.日期范围
 
-代码位置 `/src/views/${moduleName}/${functionName}/index.vue`：
+如果需要类似于“创建日期”的查询条件请参考下面的代码，并将其添加到位置 `/src/views/${moduleName}/${functionName}/index.vue`：
 
 ```vue
-      <el-form-item label="创建日期">
-        <el-date-picker
-          class="!w-[240px]"
-          v-model="timeRange"
-          value-format="YYYY-MM-DD"
-          type="daterange"
-          range-separator="-"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-        />
-      </el-form-item>
+<el-form-item label="创建日期">
+  <el-date-picker
+    class="!w-[240px]"
+    v-model="timeRange"
+    value-format="YYYY-MM-DD"
+    type="daterange"
+    range-separator="-"
+    start-placeholder="开始日期"
+    end-placeholder="结束日期"
+  />
+</el-form-item>
 ```
 
 ## 2.3 表格中显示“状态”列
 
-代码位置 `/src/views/${moduleName}/${functionName}/utils/hook.tsx`：
+如果在表格中需要显示类似于“状态”字典的列请参考下面的代码，并将其添加到位置 `/src/views/${moduleName}/${functionName}/utils/hook.tsx`：
 
 ```json
-    {
-      label: "状态",
-      prop: "status",
-      minWidth: 120,
-      cellRenderer: ({ row, props }) => (
-        <el-tag
-          size={props.size}
-          type={statusMap[row.status].cssTag}
-          effect="plain"
-        >
-          {statusMap[row.status].label}
-        </el-tag>
-      )
-    },
+{
+  label: "状态",
+  prop: "status",
+  minWidth: 120,
+  cellRenderer: ({ row, props }) => (
+    <el-tag
+      size={props.size}
+      type={statusMap[row.status].cssTag}
+      effect="plain"
+    >
+      {statusMap[row.status].label}
+    </el-tag>
+  )
+},
 ```
 
 ## 2.4 表格中“创建时间”列
 
-代码位置 `/src/views/${moduleName}/${functionName}/utils/hook.tsx`：
+如果在表格中需要显示类似于“创建时间”日期的列请参考下面的代码，并将其添加到位置 `/src/views/${moduleName}/${functionName}/utils/hook.tsx`：
 
 ```json
-    {
-      label: "创建时间",
-      minWidth: 160,
-      prop: "createTime",
-      sortable: "custom",
-      formatter: ({ createTime }) =>
-        dayjs(createTime).format("YYYY-MM-DD HH:mm:ss")
-    },
+{
+  label: "创建时间",
+  minWidth: 160,
+  prop: "createTime",
+  sortable: "custom",
+  formatter: ({ createTime }) =>
+    dayjs(createTime).format("YYYY-MM-DD HH:mm:ss")
+},
 ```
 
 ## 2.5 新增修改中“状态”.单选组
 
-代码位置 `/src/views/${moduleName}/${functionName}/${functionName}-form-modal.vue`：
+如果在表单中需要使用类似于“状态”字典的单选组请参考下面的代码，并将其添加到位置 `/src/views/${moduleName}/${functionName}/${functionName}-form-modal.vue`：
 
 ```vue
-      <el-form-item prop="status" label="状态">
-        <el-radio-group v-model="formData.status">
-          <el-radio
-            v-for="item in Object.keys(statusList)"
-            :key="item"
-            :label="statusList[item].value"
-            >{{ statusList[item].label }}</el-radio
-          >
-        </el-radio-group>
-      </el-form-item>
+<el-form-item prop="status" label="状态">
+  <el-radio-group v-model="formData.status">
+    <el-radio
+      v-for="item in Object.keys(statusList)"
+      :key="item"
+      :label="statusList[item].value"
+      >{{ statusList[item].label }}</el-radio
+    >
+  </el-radio-group>
+</el-form-item>
 ```
+
+# 3 数据库脚本
+
+当代码生成器生成了**【${moduleName}】模块>>【${tableComment}(${functionName})】**功能的代码后，将其拷贝到AgileBoot前后端工程里，编译后即可运行。
+
+但如果要在浏览器里看到这些页面并进行操作，还需要在sys_menu表中添加6条记录，这些insert语句存放在**menu4${functionName}.sql**文件中，需要你在MySQL的管理工具（如Navicat）中执行这个文件中的所有语句。
+
+# 4 启动测试
+
+在执行了**menu4${functionName}.sql**文件往数据库的sys_menu表中添加了菜单数据、并将生成的代码拷贝到前后端工程里，重启前后端工程，然后打开浏览器访问[http://localhost/#/login](http://localhost/#/login)（用户名：admin，密码：admin123），即可测试你生成的**【${moduleName}】模块>>【${tableComment}(${functionName})】**功能（骨架代码，CRUD）。
+
+进入系统后可以在“菜单管理”中调整【${tableComment}(${functionName})】功能菜单的图标等信息。
 
 # 以上信息供参考
 
