@@ -82,7 +82,7 @@
     },
     {
       "templateName": "sql/menu.sql.ftl",
-      "generatorPath": "${backendPath}/sql/${moduleName}/${functionName}/menu4${functionName}.sql"
+      "generatorPath": "${backendPath}/SQL/${moduleName}/${functionName}/menu4${functionName}.sql"
     },
     {
       "templateName": "tip/必须读我.md.ftl",
