@@ -291,7 +291,7 @@ public void delete${FunctionName}(BulkOperationCommand<Long> deleteCommand) {
 },
 ```
 
-## 2.4 表格中“创建时间”列
+## 2.4 表格中“创建时间”列格式化日期
 
 如果在表格中需要显示类似于“创建时间”日期的列请参考下面的代码，并将其添加到位置 `/src/views/${moduleName}/${functionName}/utils/hook.tsx`：
 
