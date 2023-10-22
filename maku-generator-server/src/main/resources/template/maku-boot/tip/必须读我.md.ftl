@@ -2,7 +2,7 @@
 
 代码生成器生成**【${moduleName}】模块>>【${tableComment}(${functionName})】**功能的代码/说明文件（19个）清单如下：
 
-```
+```bash
 |-->必须读我(${tableComment}-${tableName}).md //是我，是我，还是我，这世间最闪亮的烟火🎇！就是你现在看到的这个文件呀~
 |
 +---AgileBoot-Back-End
