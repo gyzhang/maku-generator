@@ -228,7 +228,7 @@ public void delete${FunctionName}(BulkOperationCommand<Long> deleteCommand) {
 
 # 2 前端代码
 
-以下是一些前端组件使用的参考，可以通过拷贝的形式添加到生成的代码中来使用，主要是为了服务不熟悉前端的后端开发人员或全栈开发人员使用。
+以下是一些前端组件使用的参考，可以通过拷贝的形式添加到生成的代码中来使用，主要是为了服务不熟悉前端的后端开发人员或全栈开发人员。
 
 ## 2.1 查询条件“状态”.下拉框组件
 
@@ -270,7 +270,19 @@ public void delete${FunctionName}(BulkOperationCommand<Long> deleteCommand) {
 </el-form-item>
 ```
 
-## 2.3 表格中显示“状态”列显示字典的中文label
+## 2.3 查询条件附初始值
+
+如果需要给查询表单中的查询条件赋初始值，如不给“状态”赋任何值，这样可以查询出来“正常”和“停用”的数据，请修改`/src/views/${moduleName}/${functionName}/utils/hook.tsx`中的searchFormParams常量：
+
+```typescript
+const searchFormParams = reactive<${FunctionName}ListCommand>({
+  ...
+  status: undefined,
+  ...
+});
+```
+
+## 2.4 表格中显示“状态”列显示字典的中文label
 
 如果在表格中需要显示类似于“状态”字典的列请参考下面的代码，并将其添加到位置 `/src/views/${moduleName}/${functionName}/utils/hook.tsx`：
 
@@ -291,7 +303,7 @@ public void delete${FunctionName}(BulkOperationCommand<Long> deleteCommand) {
 },
 ```
 
-## 2.4 表格中“创建时间”列格式化日期
+## 2.5 表格中“创建时间”列格式化日期
 
 如果在表格中需要显示类似于“创建时间”日期的列请参考下面的代码，并将其添加到位置 `/src/views/${moduleName}/${functionName}/utils/hook.tsx`：
 
@@ -306,7 +318,7 @@ public void delete${FunctionName}(BulkOperationCommand<Long> deleteCommand) {
 },
 ```
 
-## 2.5 新增修改中“状态”.单选组组件
+## 2.6 新增修改中“状态”.单选组组件
 
 如果在表单中需要使用类似于“状态”字典的单选组请参考下面的代码，并将其添加到位置 `/src/views/${moduleName}/${functionName}/${functionName}-form-modal.vue`：
 
@@ -323,7 +335,7 @@ public void delete${FunctionName}(BulkOperationCommand<Long> deleteCommand) {
 </el-form-item>
 ```
 
-## 2.6 新增修改中“显示顺序”.数字输入框组件
+## 2.7 新增修改中“显示顺序”.数字输入框组件
 
 如果在表单中需要使用数字+-操作组件，请参考下面的代码，并将其添加到位置 `/src/views/${moduleName}/${functionName}/${functionName}-form-modal.vue`：
 
@@ -333,7 +345,7 @@ public void delete${FunctionName}(BulkOperationCommand<Long> deleteCommand) {
 </el-form-item>
 ```
 
-## 2.7 新增修改中“备注”.多行文本组件
+## 2.8 新增修改中“备注”.多行文本组件
 
 如果在表单中需要使用TextArea组件，请参考下面的代码，并将其添加到位置 `/src/views/${moduleName}/${functionName}/${functionName}-form-modal.vue`：
 
