@@ -228,7 +228,9 @@ public void delete${FunctionName}(BulkOperationCommand<Long> deleteCommand) {
 
 # 2 前端代码
 
-## 2.1 查询条件“状态”.下拉框
+以下是一些前端组件使用的参考，可以通过拷贝的形式添加到生成的代码中来使用，主要是为了服务不熟悉前端的后端开发人员或全栈开发人员使用。
+
+## 2.1 查询条件“状态”.下拉框组件
 
 如果需要类似于“状态”字典的查询条件请参考下面的代码，并将其添加到位置 `/src/views/${moduleName}/${functionName}/index.vue`：
 
@@ -250,7 +252,7 @@ public void delete${FunctionName}(BulkOperationCommand<Long> deleteCommand) {
 </el-form-item>
 ```
 
-## 2.2 查询条件“创建日期”.日期范围
+## 2.2 查询条件“创建日期”.日期范围选择组件
 
 如果需要类似于“创建日期”的查询条件请参考下面的代码，并将其添加到位置 `/src/views/${moduleName}/${functionName}/index.vue`：
 
@@ -268,7 +270,7 @@ public void delete${FunctionName}(BulkOperationCommand<Long> deleteCommand) {
 </el-form-item>
 ```
 
-## 2.3 表格中显示“状态”列
+## 2.3 表格中显示“状态”列显示字典的中文label
 
 如果在表格中需要显示类似于“状态”字典的列请参考下面的代码，并将其添加到位置 `/src/views/${moduleName}/${functionName}/utils/hook.tsx`：
 
@@ -295,16 +297,16 @@ public void delete${FunctionName}(BulkOperationCommand<Long> deleteCommand) {
 
 ```json
 {
-  label: "创建时间",
+  label: "创建日期",
   minWidth: 160,
   prop: "createTime",
   sortable: "custom",
   formatter: ({ createTime }) =>
-    dayjs(createTime).format("YYYY-MM-DD HH:mm:ss")
+    dayjs(createTime).format("YYYY-MM-DD")
 },
 ```
 
-## 2.5 新增修改中“状态”.单选组
+## 2.5 新增修改中“状态”.单选组组件
 
 如果在表单中需要使用类似于“状态”字典的单选组请参考下面的代码，并将其添加到位置 `/src/views/${moduleName}/${functionName}/${functionName}-form-modal.vue`：
 
@@ -318,6 +320,30 @@ public void delete${FunctionName}(BulkOperationCommand<Long> deleteCommand) {
       >{{ statusList[item].label }}</el-radio
     >
   </el-radio-group>
+</el-form-item>
+```
+
+## 2.6 新增修改中“显示顺序”.数字输入框组件
+
+如果在表单中需要使用数字+-操作组件，请参考下面的代码，并将其添加到位置 `/src/views/${moduleName}/${functionName}/${functionName}-form-modal.vue`：
+
+```vue
+<el-form-item prop="${functionName}Sort" label="${tableComment}顺序" required>
+  <el-input-number :min="1" v-model="formData.${functionName}Sort" />
+</el-form-item>
+```
+
+## 2.7 新增修改中“备注”.多行文本组件
+
+如果在表单中需要使用TextArea组件，请参考下面的代码，并将其添加到位置 `/src/views/${moduleName}/${functionName}/${functionName}-form-modal.vue`：
+
+```vue
+<el-form-item label="备注" prop="remark">
+  <el-input
+    type="textarea"
+    v-model="formData.remark"
+    placeholder="备注"
+  />
 </el-form-item>
 ```
 
