@@ -17,16 +17,16 @@ import lombok.EqualsAndHashCode;
 @Data
 public class ${FunctionName}Query extends AbstractPageQuery<${ClassName}Entity> {
 
-    private String ${functionName}Code;
-    private String ${functionName}Name;
-    private Integer status;
+    <#list queryList as field>
+    private ${field.attrType} ${field.attrName};
+    </#list>
 
     @Override
     public QueryWrapper<${ClassName}Entity> addQueryCondition() {
         QueryWrapper<${ClassName}Entity> queryWrapper = new QueryWrapper<${ClassName}Entity>()
-            .eq(status != null, "status", status)
-            .eq(StrUtil.isNotEmpty(${functionName}Code), "${functionName}_code", ${functionName}Code)
-            .like(StrUtil.isNotEmpty(${functionName}Name), "${functionName}_name", ${functionName}Name);
+<#list queryList as field>
+            <#if ("${field.attrType}" == "String")>.like(StrUtil.isNotEmpty(${field.attrName}), "${field.fieldName}", ${field.attrName})<#else>.eq(${field.attrName} != null, "${field.fieldName}", ${field.attrName})</#if><#if !field_has_next>;</#if>
+</#list>
         <#list fieldList as field>
             <#if field.fieldName == "${functionName}_sort">
         if (StrUtil.isEmpty(this.getOrderColumn())) {
