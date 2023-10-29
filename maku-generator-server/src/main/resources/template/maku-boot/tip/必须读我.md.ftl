@@ -2,6 +2,8 @@
 
 代码生成器生成**【${moduleName}】模块>>【${tableComment}(${functionName})】**功能的代码/说明文件（19个）清单如下：
 
+> 代码生成器的模板中硬编码了两个字段status和${functionName}_sort，如果你的数据库表中没有这两个字段，前后端都要做对应调整。
+
 ```bash
 |-->必须读我(${tableComment}-${tableName}).md //是我，是我，还是我，这世间最闪亮的烟火🎇！就是你现在看到的这个文件呀~
 |
