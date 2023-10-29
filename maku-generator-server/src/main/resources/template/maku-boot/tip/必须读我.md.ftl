@@ -325,7 +325,7 @@ const searchFormParams = reactive<${FunctionName}ListCommand>({
 如果在表单中需要使用类似于“状态”字典的单选组请参考下面的代码，并将其添加到位置 `/src/views/${moduleName}/${functionName}/${functionName}-form-modal.vue`：
 
 ```vue
-<el-form-item prop="status" label="状态">
+<el-form-item label="状态" prop="status">
   <el-radio-group v-model="formData.status">
     <el-radio
       v-for="item in Object.keys(statusList)"
@@ -342,7 +342,7 @@ const searchFormParams = reactive<${FunctionName}ListCommand>({
 如果在表单中需要使用数字+-操作组件，请参考下面的代码，并将其添加到位置 `/src/views/${moduleName}/${functionName}/${functionName}-form-modal.vue`：
 
 ```vue
-<el-form-item prop="${functionName}Sort" label="${tableComment}顺序" required>
+<el-form-item label="${tableComment}顺序" prop="${functionName}Sort" required>
   <el-input-number :min="1" v-model="formData.${functionName}Sort" />
 </el-form-item>
 ```
@@ -357,6 +357,18 @@ const searchFormParams = reactive<${FunctionName}ListCommand>({
     type="textarea"
     v-model="formData.remark"
     placeholder="备注"
+  />
+</el-form-item>
+```
+
+## 2.9 修改中“xxx编码”设置为只读
+
+```vue
+<el-form-item label="xxx编码" prop="${functionName}Code">
+  <el-input
+    v-model="formData.${functionName}Code"
+    placeholder="xxx编码"
+    :disabled="type === 'update'"
   />
 </el-form-item>
 ```
