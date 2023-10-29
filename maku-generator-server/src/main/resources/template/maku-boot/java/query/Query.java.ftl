@@ -24,9 +24,9 @@ public class ${FunctionName}Query extends AbstractPageQuery<${ClassName}Entity> 
     @Override
     public QueryWrapper<${ClassName}Entity> addQueryCondition() {
         QueryWrapper<${ClassName}Entity> queryWrapper = new QueryWrapper<${ClassName}Entity>()
-<#list queryList as field>
-            <#if ("${field.attrType}" == "String")>.like(StrUtil.isNotEmpty(${field.attrName}), "${field.fieldName}", ${field.attrName})<#else>.eq(${field.attrName} != null, "${field.fieldName}", ${field.attrName})</#if><#if !field_has_next>;</#if>
-</#list>
+        <#list queryList as field>
+            <#if (field.attrType == "String")>.like(StrUtil.isNotEmpty(${field.attrName}), "${field.fieldName}", ${field.attrName})<#else>.eq(${field.attrName} != null, "${field.fieldName}", ${field.attrName})</#if><#if !field_has_next>;</#if>
+        </#list>
         <#list fieldList as field>
             <#if field.fieldName == "${functionName}_sort">
         if (StrUtil.isEmpty(this.getOrderColumn())) {
