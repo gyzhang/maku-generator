@@ -219,7 +219,7 @@ function openDialog(type: "add" | "update", row?: ${FunctionName}PageResponse) {
       v-model="modalVisible"
       :type="opType"
       :row="opRow"
-      @success="onSearch"
+      @success="onSearch(tableRef)"
     />
   </div>
 </template>
