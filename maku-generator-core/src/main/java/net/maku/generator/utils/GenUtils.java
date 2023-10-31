@@ -113,6 +113,7 @@ public class GenUtils {
                     fieldType = fieldType.substring(0, fieldType.indexOf(" "));
                 }
                 field.setFieldType(fieldType);
+                field.setFieldLength(rs.getLong(query.fieldLength()));
                 field.setFieldComment(rs.getString(query.fieldComment()));
                 String key = rs.getString(query.fieldKey());
                 field.setPrimaryPk(StringUtils.isNotBlank(key) && "PRI".equalsIgnoreCase(key));

@@ -47,6 +47,11 @@ public interface AbstractQuery {
     String fieldType();
 
     /**
+     * 字段长度
+     */
+    String fieldLength();
+
+    /**
      * 字段注释
      */
     String fieldComment();

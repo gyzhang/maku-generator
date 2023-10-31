@@ -42,7 +42,7 @@ public class MySqlQuery implements AbstractQuery {
 
     @Override
     public String tableFieldsSql() {
-        return "select column_name, data_type, column_comment, column_key from information_schema.columns "
+        return "select column_name, data_type, character_maximum_length, column_comment, column_key from information_schema.columns "
                 + "where table_name = '%s' and table_schema = (select database()) order by ordinal_position";
     }
 
@@ -54,6 +54,11 @@ public class MySqlQuery implements AbstractQuery {
     @Override
     public String fieldType() {
         return "data_type";
+    }
+
+    @Override
+    public String fieldLength() {
+        return "character_maximum_length";
     }
 
     @Override

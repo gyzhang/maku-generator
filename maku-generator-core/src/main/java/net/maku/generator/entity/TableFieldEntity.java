@@ -32,6 +32,10 @@ public class TableFieldEntity {
      */
     private String fieldType;
     /**
+     * 字段长度
+     */
+    private Long fieldLength;
+    /**
      * 字段说明
      */
     private String fieldComment;

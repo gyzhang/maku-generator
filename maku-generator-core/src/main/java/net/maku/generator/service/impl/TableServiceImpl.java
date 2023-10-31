@@ -159,6 +159,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableDao, TableEntity> imp
             updateField.setPrimaryPk(field.isPrimaryPk());
             updateField.setFieldComment(field.getFieldComment());
             updateField.setFieldType(field.getFieldType());
+            updateField.setFieldLength(field.getFieldLength());
             updateField.setAttrType(field.getAttrType());
             updateField.setTsType(field.getTsType());
 
