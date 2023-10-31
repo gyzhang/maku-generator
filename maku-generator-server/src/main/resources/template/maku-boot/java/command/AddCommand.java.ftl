@@ -20,18 +20,16 @@ public class Add${FunctionName}Command {
     * ${field.fieldComment}
     */
     <#if field.formRequired>
+        <#if field.attrType=="String">
     @NotBlank(message = "${field.fieldComment}不能为空")
+        <#else>
+    @NotNull(message = "${field.fieldComment}不能为空")
+        </#if>
     </#if>
     <#if field.fieldLength gt 0>
-    @Size(max = ${field.fieldLength}, message = "${field.fieldComment}长度不能超过${field.fieldLength}个字符")
+    @Size(max = ${field.fieldLength?c}, message = "${field.fieldComment}长度不能超过${field.fieldLength}个字符")
     </#if>
     protected ${field.attrType} ${field.attrName};
 
 </#list>
-    /**
-    * 状态
-    */
-    @PositiveOrZero
-    protected String status;
-
 }
