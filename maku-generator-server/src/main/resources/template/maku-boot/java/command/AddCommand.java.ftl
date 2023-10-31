@@ -15,31 +15,19 @@ import lombok.Data;
 @Data
 public class Add${FunctionName}Command {
 
+<#list formList as field>
     /**
-    * ${tableComment}编码
+    * ${field.fieldComment}
     */
-    @NotBlank(message = "${tableComment}编码不能为空")
-    @Size(max = 64, message = "${tableComment}编码长度不能超过64个字符")
-    protected String ${functionName}Code;
+    <#if field.formRequired>
+    @NotBlank(message = "${field.fieldComment}不能为空")
+    </#if>
+    <#if field.fieldLength gt 0>
+    @Size(max = ${field.fieldLength}, message = "${field.fieldComment}长度不能超过${field.fieldLength}个字符")
+    </#if>
+    protected ${field.attrType} ${field.attrName};
 
-    /**
-     * ${tableComment}名称
-     */
-    @NotBlank(message = "${tableComment}名称不能为空")
-    @Size(max = 64, message = "${tableComment}名称长度不能超过64个字符")
-    protected String ${functionName}Name;
-
-    /**
-     * ${tableComment}排序
-     */
-    @NotNull(message = "显示顺序不能为空")
-    protected Integer ${functionName}Sort;
-
-    /**
-    * 备注
-    */
-    protected String remark;
-
+</#list>
     /**
     * 状态
     */
