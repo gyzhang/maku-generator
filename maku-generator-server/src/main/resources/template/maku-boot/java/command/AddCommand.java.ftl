@@ -26,7 +26,7 @@ public class Add${FunctionName}Command {
     @NotNull(message = "${field.fieldComment}不能为空")
         </#if>
     </#if>
-    <#if field.fieldLength gt 0>
+    <#if (field.fieldLength gt 0) && (field.fieldLength lt 2147483647)>
     @Size(max = ${field.fieldLength?c}, message = "${field.fieldComment}长度不能超过${field.fieldLength}个字符")
     </#if>
     protected ${field.attrType} ${field.attrName};
